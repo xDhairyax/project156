@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+
+        <script src="./components/Rotation.js"></script>
+        <script src="./components/Coins.js"></script>
+        <script src="./components/Fish.js"></script>
+        <script src="./components/Game.js"></script>
+    </head>
+
+    <body>
+        <a-scene>
+
+            <a-entity  
+            camera="active: true"
+            look-controls
+            position="0 10 25">
+            </a-entity>
+
+            <a-assets timeout="10000">
+                
+                <a-assets-item
+                id="diver"
+                src="/assets/diver/scene.gltf"
+                ></a-assets-item>
+
+                <a-assets-item
+                id="islandMap"
+                src="/assets/island/scene.gltf"
+                ></a-assets-item>
+
+                <a-assets-item
+                id="Coins"
+                src="/assets/coins/scene.gltf"
+                ></a-assets-item>
+                
+            </a-assets>
+
+
+            <a-entity
+            id="island"
+            gltf-model="#islandMap"
+            scale="0.5 0.5 0.5"
+          position="0 -15 -80"
+            animation="property: position; to: 0 0 1000;easing:linear; loop: true; dur: 1500000"
+            island-rotation
+            coins
+            fish
+            >
+          </a-entity>
+
+          
+
+          <a-entity
+            id="diver_model"
+            gltf-model="#diver"
+            scale="0.1 0.1 0.1"
+            position="5 0 15"
+            rotation="0 90 -20"  
+            dynamic-body="mass: 0"
+            game-play 
+            diver-rotation      
+            >
+          </a-entity>
+
+          <!--Game Timer and Score-->
+            <a-entity id="header" position="1 -4 0">
+          <!-- Title -->
+            <a-entity
+              position="-26.6 31.5 0"
+              text="font: exo2bold; align: center; width: 40; color: black; value: VIRTUAL SCUBA DIVER"
+            ></a-entity>
+
+          <!--Timer-->
+            <a-entity position="-23.5 28 0">
+              <a-entity
+                position="0 0.07 0"
+                text="font: aileronsemibold; width: 12; color: black; value: TIME REMAINING"
+              ></a-entity>
+              <a-entity
+                id="timer"
+                position="-8 0.3 0"
+                text="font: exo2bold; align: center; width: 30; color: black; value: 00:00"
+              ></a-entity>
+            </a-entity>
+
+          <!-- Target Status -->
+            <a-entity position="-16 28 0">
+              <a-entity
+                position="0.5 0.13 0"
+                text="font: aileronsemibold; width: 12; color: black; value: TARGETS REMAINING"
+              ></a-entity>
+              <a-entity
+                id="targets"
+                position="-7 0.3 0"
+                text="font: exo2bold; align: center; width: 30; color: black; value: 20"
+              ></a-entity>
+            </a-entity>
+
+          <!-- Score -->
+            <a-entity position="27.5 31.5 0">
+              <a-entity
+                position="0 0 0"
+                text="font: exo2bold; align: center; width: 40; color: black; value: SCORE"
+              ></a-entity>
+              <a-entity
+                id="score"
+                position="0 -2 0"
+                text="font: exo2bold; align: center; width: 40; color: black; value: 0"
+              ></a-entity>
+              </a-entity>
+            </a-entity>
+
+            <!---Game Over-->
+                <a-entity
+                id="game_over_text"
+                position="0 7.5 0"
+                text="font: exo2bold; align: center; width: 100; color: white;value: Game Over!!!"
+                visible="false"
+                ></a-entity>
+
+        </a-scene>
+    </body>
+
+</html>
